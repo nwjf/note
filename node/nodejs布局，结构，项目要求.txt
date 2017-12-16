@@ -1,0 +1,19 @@
+1、文件目录
+	
+	config		接口文件夹
+			--链接数据库文件
+			--自定义模块
+	models		文件夹
+			--数据库骨架文件
+	controllers 	控制器文件夹
+			--数据库集合骨架
+	routes		路由文件夹
+	public		静态资源文件夹
+	views		ejs 模板文件
+		--layouts	公共模板文件
+				<% include layouts/a %>	加载公共模板
+	node_modules npm包文件夹
+	bin 
+		--www	//启动文件
+	app.js	入口文件
+	package.json	依赖包文件

@@ -1,0 +1,14 @@
+require(遵循AMD语法)
+异步加载require（兼容ie）
+
+	<script src="js/require.js" defer async="true" ></script>
+
+加载页面主文件
+	<script src="js/require.js" data-main="js/main"></script>
+
+	data-main: 指定页面加载的主文件（可以不加.js后缀名）
+
+
+主模块写法
+	require(['moduleA','moduleB'], function (moduleA, moduleB){});
+

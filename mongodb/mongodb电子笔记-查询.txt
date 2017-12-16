@@ -1,0 +1,138 @@
+﻿
+1--创建数据库，或者切换数据库
+	use mm
+
+2--创建集合
+	db.createCollection('集合名字');
+
+3--查看不为空的数据库
+	show dbs
+
+4--显示当前所在数据库
+	db
+
+5--查看当前数据库下的所有集合
+	show collections
+
+6--查看stu集合下的说有字段
+	db.stu.find().pretty();
+
+7--插入数据
+	db.stu.insert({});
+
+	create()
+
+1--更新所有的数据,不存在将自动创建
+	db.demo.update({name:'张三'},{$set:{age:20}},{multi:true});
+
+--跟新save
+	db.demo.save(obj)
+	--存在相同id的更新数据，没有相同id的添加
+
+2--删除集合
+	db.demo.drop();
+
+	--删除字段
+	db.demo.remove();
+
+3--时间戳
+	Date.now();
+
+4--$inc 加操作符，数字按步长增加
+	db.stu.update({name:'张三'},{$inc:{age:10}});
+		--在原来的基础上增加10;
+
+5--$push 向数组中添加元素
+	db.stu.update({name:'张三'},{$push:{class:'宫保鸡丁'}});
+		--添加一个元素
+
+	db.stu.update({name:'张三'},{$push:{class:{$each:['宫保鸡丁','辣子鸡丁']}}});
+		--添加多个元素
+
+6--$addToSet 如果已经存在，那么不再添加
+	db.stu.update({name:'张三'},{$addToSet:{class:'辣子鸡丁'}});
+
+7--$pull  删除数组中的指定值
+	db.sty.update({name:'张三'},{$pull:{class:'辣子鸡丁'}});
+		--删除指定元素
+	db.stu.update({name:'张三'},{$pop:{cook:1}});
+		--从尾部开始删除，cook为元素名，cook：1
+	db.stu.update({name:'张三'},{$pop:{cook:-1}});
+		--从前面开始删除，cook：-1；
+
+查询
+
+db.stu.find({条件},{数据});
+	--值查询数据
+	--db.mu.find({name:'张三'},{class:'过账'});
+	或者	db.stu.find({条件},{class:1,age:1}); --显示两个元素
+
+db.stu.find({条件},{age:0});
+
+	--除age以外的所有属性
+	--或者 db.stu.find({条件},{age:false});
+
+================
+$gt		大于
+$lt		小于
+$eq		等于
+$gte	大于等于
+$lte	小于等于
+$ne		不等于
+===============
+
+db.stu.find({age:{$gt:20}});
+	--年龄大于20的
+
+--$and--
+db.stu.find({age:20,sex:'男'});==db.stu.find({$and:[{age:20},{sex:'男'}]);
+	--同时满足两个属性
+
+
+--匹配不存在的数据和值为Null的数据
+db.stu.find({name:null});
+	--匹配name为空或者没有的
+
+--$in  查询在范围内的值
+db.stu.find({name:{$in:['张三','李四']}});
+
+--$nin  查询不在范围内的值
+db.stu.find({name:{$nin:['张三','李四']}});
+
+--$mod  求余
+db.stu.find({age:{$mod:[2,0]}})
+	--和2求余，余数为0
+
+--$not  除。。外
+db.stu.find({name:{$not:'正则'}});
+	--除张三以外的所有
+	--使用正则匹配
+
+	var con = {cate: {$ne:'dev'}};
+
+
+=============
+使用正则表达式匹配
+db.stu.find({name:/^王/});
+	--匹配以王开头的所有
+===========
+
+--$size   属性值
+db.stu.find({class:{$size:5}});
+	--匹配class的值为5个的
+
+--sort()排序
+db.stu.find().sort({age:1});
+		--升序-1,1
+
+--score集合
+db.score.insert({name:'张三',hmtl:19,css:11,js:1})
+
+--skip()  跳过多少数据
+--limit() 查看多少数据  ，限制查询多少条
+db.stu.find().skip(10).limit(10)
+	--跳过10条数据查看10条数据
+
+--count()
+	查询数量
+	.find().count()

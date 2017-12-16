@@ -1,0 +1,15 @@
+<meta name="viewport" content="width=device-width" initial-scale="1">
+
+@media screen and (min-width: 960px){}
+@media screen and (min-width: 600px) and (max-width: 960px){}
+
+
+<meta name="keywords" content="">
+<meta name="description" content="">
+
+
+word-break:keep-all;       /* 不换行 */
+white-space:nowrap;        /* 不换行 */
+overflow:hidden;           /* 内容超出宽度时隐藏超出部分的内容 */
+text-overflow:ellipsis;         
+/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/

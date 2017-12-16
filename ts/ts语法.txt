@@ -1,0 +1,50 @@
+1--类型
+	boolean
+	number
+	string
+	number[] / string[] Array[number] / Array[string]
+
+
+	let num:number = 1
+	let num:[string,number] = ['s',10]
+
+2-- enum	枚举
+
+3-- any 	类型
+	let an : any =
+		类型可以改变
+
+4-- void	没有任何类型
+
+5-- class	类
+	
+	class className {}
+
+	类方法
+	show():void{}
+
+	继承extends
+	class className1 extends className2{}
+	重写类方法
+	show(){}
+
+	抽象类abstract  只可以在实例中使用,可被继承实现
+
+6-- 修饰符 private(只允许自身使用) \ protected(可在继承类中使用) \ public \ static 
+	
+	private name1:string		默认是public
+	public name2:string
+
+7-- 函数(参数，返回类型)
+	let show:(name:String) => String = function(name:String):String{return 'string'}
+	let show = function(name:String):String{return 'string'}
+
+	可选参数
+	let show = function(name?:String):String{return 'string'}
+
+8-- 接口interface
+	
+	interface show{}
+
+	实现接口implements
+	class mu implements show{}

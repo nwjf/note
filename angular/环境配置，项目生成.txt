@@ -1,0 +1,26 @@
+﻿1--然后在全局安装Angular CLI。
+	npm install -g @angular/cli
+
+2--创建新项目
+	ng new my-app
+		创建项目，my-app项目名称
+
+3--下载依赖包
+	npm install
+	npm i
+
+4--运行程序
+	ng serve --open
+	ng serve -o
+
+		ng serve当您对这些文件进行更改时，该命令启动服务器，监视您的文件，并重新构建应用程序。
+		使用--open（或只-o）选项将自动打开您的浏览器http://localhost:4200/。
+	或者
+
+	npm start
+
+5--浏览器打开
+
+	webpack: Compiled successfully.		//编译成功
+
+	localhost:4200

@@ -1,0 +1,133 @@
+canvas 绘图
+	--ie9++支持
+
+	<canvas id="can" width="200px" height="200px"></canvas>
+		设置元素，设置画布宽高
+
+	var canvas = $('#can');
+	var context=canvas.getContext("2d"); 	//获取上下文的环境 , 所有操作都基于上下文环境context
+
+
+	存档
+		ctx.save();		储存当前状态
+	   ctx.restore();	回到存档状态
+
+	开始
+	   ctx.stroke()		绘制图形
+	   ctx.beginPath()	开始新路径
+	   ctx.closePath()	自动闭合路径
+
+	画布旋转，偏移，缩放
+	   ctx.translate()	移动圆点
+	   ctx.rotate()		旋转
+	   ctx.scale(sx,sy);	缩放
+
+	清除画布
+	   ctx.clearRect(x,y,w,h)	清除画布
+
+	线条
+	   ctx.lineWidth=1 		线条宽度
+	   ctx.strokeStyle=		线条颜色
+	   ctx.fillStyle=		填充颜色
+	   ctx.fill()			填充
+
+	阴影
+	   ctx.shadowColor		阴影颜色
+	   ctx.shadowOffsetX	阴影偏移
+	   ctx.shadowOffsetY	阴影偏移
+	   ctx.shadowBlur		阴影模糊成都默认1	
+
+	重叠
+	   globalCompositeOperation
+
+
+
+	绘制文字
+		实体字
+		cxt.font = 'bold 40px 黑体';
+				加粗，大小，字体家族
+		cxt.fillText("Hello World",10,50);
+				绘制文本，位置
+
+		空心字
+		cxt.font = 'bold 40px 黑体';
+		cxt.strokeStyle = "yellow"; 
+		cxt.strokeText('1111',100,100);
+
+
+
+
+	1、绘制图片
+		var canvas = $('#can').get(0);
+			get(0)相当于eq，解决出错问题
+		var context=canvas.getContext("2d"); 	//获取上下文的环境 , 
+
+		context.drawImage(img,x,y,width,height,dx,dy,dWidth,dHeight);
+			绘制图像，
+				img		图像
+				x		图片上其实坐标
+				y		图片上要绘制的其实坐标
+				width	要绘制的宽度
+				height	要绘制的高度
+				dx		画布开始绘制的位置
+				dy		画布开始绘制的位置
+				dWidth	绘制到画布上的宽度
+				dHeight	绘制到画布上的高度
+
+	2、画直线，矩形，线条
+
+		var convas = $('#can');
+		var context=canvas.getContext("2d"); 	//获取上下文的环境 , 
+
+		ctx.moveTo(100,100);
+			moveTo()方法表示一次绘制的起点坐标，
+		ctx.lineTo(500,500);
+			lineTo()表示基于上一个坐标点到这个坐标点之间的直线连接。连续直线写多个lineto
+		ctx.lineWidth = 8;
+			线条的宽度
+		ctx.strokeStyle = "#333";
+			线条的颜色
+		ctx.stroke();
+			//绘制--基于当前状态进行绘制。
+
+		ctx.beginPath();
+			全新的绘制，重置当前路径，写最前，清空之前的路径
+
+		ctx.closePath();
+			自动闭合路径，绘制闭合的多边路径，最后一条线的绘制可以省略，它会自动帮我们连接到绘制起点以形成封闭的多边形。
+
+		ctx.fillStyle = "red";   
+			填充颜色，设置填充颜色
+		ctx.fill(); 
+			填充，使用填充方法进行填充
+
+	<1>、rect方法绘制矩形
+			context.rect(x,y,width,height);
+				x	矩形距离左边的距离
+				y	矩形距离上边的距离
+				width	矩形的宽
+				height	矩形的高
+			context.closePath();
+			context.strokeStyle = 'red';	//边框颜色
+		    context.fillStyle = 'red';	//填充颜色
+		    context.fill(); //先填充
+		    context.stroke(); //再绘制边框
+
+		    ==============
+		    或者
+		    context.fillRect(x,y,width,height);		绘制有填充的矩形
+    		context.strokeRect(x,y,width,height);	绘制没填充的矩形
+
+    <2>, arc 绘制 圆，圆弧
+    		ctx.arc(x,y,r,0*Math.PI,2*Math.PI,[true]);
+    			x	圆心x
+    			y	圆心y
+    			r	圆半径
+    			4	开始圆弧位置，起始点
+    			5	结束点，圆弧位置
+    			true	逆时针，可不写，默认顺时针
+
+    	ctx.clearRect(0,0,width,height)		//清除画布
+    		//起点坐标，清除的宽度和高度
+
+

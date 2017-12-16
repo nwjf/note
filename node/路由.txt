@@ -1,0 +1,60 @@
+﻿一、地址
+	dbUrl = 'mongodb://用户名:密码@地址:端口号/数据库名';
+	dbUrl = 'mongodb://demo:demo@127.0.0.1:27017/stu';
+二、链接数据库
+	mc.connect(dbUrl,function(error,db){
+		db.collection('mu').find().toArray(function(error,data){}));
+	});
+三、加载模块mongodb
+	var mongodb = require('mongodb');
+	var mc = mongodb.MongoClient;
+
+三、关闭数据库
+
+	db.close();
+
+四、将字符串转为id对象
+
+	mongodb.ObjectId();
+
+五、req , res
+
+	req.query()		获取get方式
+	req.body()		获取post方式
+	req.params()	获取地址
+
+	res.send()		返回文字
+	res.render()	返回模板
+	res.redirect()	返回
+		--('back')	哪来回哪
+		--('/')		回到/，
+
+六、
+	routes 文件，为路由文件
+		index.js	首页路由文件
+
+			var express = require('express');
+			var router = express.Router();
+
+			var indexCtrl = require('../controllers/indexController');
+				--加载控制器
+
+			router.get('/reg',indexCtrl.reg);
+				--分布路由
+			module.exports = router;
+				--暴露模块
+
+	controllers 文件，为控制器文件
+		indexController.js
+			var userModel = require('../models/userModel');
+				--加载用户模型，数据库骨架
+
+			var index = {}
+				--创建对象
+
+			index.req = function(req,res){
+				内容,路由对象，实现路由的分配
+			};
+
+			module.exports = index;
+				--暴露模块

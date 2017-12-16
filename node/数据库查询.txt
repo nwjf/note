@@ -1,0 +1,2 @@
+userModel.find().populate('集合',{查询的数据}).exec(function(){});
+	--exec 回调函数

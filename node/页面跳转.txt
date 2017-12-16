@@ -1,0 +1,10 @@
+其实想要兼容火狐很简单，只要改变一下他的赋值方式就可以 window.location.href=“web/login.jsp”   这种跳转方式在IE和火狐上是都能够成功的。
+
+
+下面是几个关于页面跳转的方式：
+　　top.location.href=”url”          在顶层页面打开url（跳出框架）
+　　self.location.href=”url”         仅在本页面打开url地址
+　　parent.location.href=”url” 　    在父窗口打开Url地址
+　　this.location.href=”url” 　　    用法和self的用法一致
+
+为了避免兼容性的问题，最好采用等号的形式进行跳转。

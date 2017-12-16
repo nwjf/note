@@ -1,0 +1,37 @@
+一、
+	把wxParse文件目录放到根目录下
+
+二、.wxml文件
+	在 index.wxml 中引入
+	<import src="../../wxParse/wxParse.wxml"/>
+	<block wx:for="{{article}}" wx:key="index">
+        <template is="wxParse" data="{{wxParseData:item}}"/>
+    </block>
+
+三、.wxss文件
+	@import "/wxParse/wxParse.wxss";
+
+四、.js文件
+	onLoad事件里
+
+	var WxParse = require('../../wxParse/wxParse.js');
+	var article = res.data.data.content;
+	/**
+	* WxParse.wxParse(bindName , type, data, target,imagePadding)
+	* 1.bindName绑定的数据名(必填)
+	* 2.type可以为html或者md(必填)
+	* 3.data为传入的具体数据(必填)
+	* 4.target为Page对象,一般为this(必填)
+	* 5.imagePadding为当图片自适应是左右的单一padding(默认为0,可选)
+	*/
+	var that = this;
+	WxParse.wxParse('article', 'html', article, that,5);
+	  }
+
+	  =======================================================
+	  	article 要和 .wxml 文件中的 wx:for="{{article}}"同名
+	  =======================================================
+
+五、
+
+六、

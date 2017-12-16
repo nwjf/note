@@ -1,0 +1,16 @@
+一、req	--请求的数据
+	req.query		处理get请求
+	req.params		处理/:xxx的get请求
+	req.body		处理post 请求
+	req.param		处理get/post 请求，优先级高到低 params > body > query
+
+二、res --返回的数据
+	res.send()		发送各类型的响应
+	res.render()	发送模板
+	res.redirect()	重定向
+	res.download()	提示下载文件
+	res.end()		终结响应处理流程
+	res.json()		发送一个JSON格式的响应
+	res.jsonp()		发送一个支持JSONP的JSON格式的响应
+	res.sendFile	以八位字节流的形式发送文件
+	res.sendStatus()	设置响应状态码，并将其以字符串形式作为响应体的一部分发送

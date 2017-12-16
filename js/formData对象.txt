@@ -1,0 +1,13 @@
+FormData()对象
+
+	var formdata = new FormData();  
+		创建空formData对象
+	formdata.append('name','fdipzone'); 
+		使用append插入数据
+
+	结合file对象插入文件，使用ajax上传到后台
+
+
+
+	用form表单创建formData对象
+	var formdata = new FormData($('#form'));	//#form  表单的ID

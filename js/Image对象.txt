@@ -1,0 +1,35 @@
+Image 对象
+	
+	var img = new Image([width],[height]);		//创建图像对象,width/height--可写可不写
+
+	 创建一个Image对象：var a=new Image();    定义Image对象的src: a.src=”xxx.gif”;    这样做就相当于给浏览器缓存了一张图片。
+
+	属性
+		align ：	设置图片与内联内容的对齐方式
+		alt ：		设置或返回图片无法显示时的文字
+		complete ：	true/false  浏览器判断图片是否加载完整(不管成功失败)    这个是否涉及到懒加载？？？有待研究
+		border ：	设置或者返回图片周围的边框
+		height ：	设置或返回图片的高度
+		width ：	设置或返回图片的宽度
+		isMap ：	返回图像是否是服务器端的图像映射。这个是否可以用做判断从数据库中拿到的数据是否正确？
+		useMap ：	设置或返回客户端图像映射的 usemap 属性的值。
+		id ：		设置或者返回图片的id  利用id操作图片
+		name ：		设置或者返回图片的name 
+		hspace ：	设置或者返回图片左或者右的空白部分
+		vspace ：	设置或者返回图片上或者下的空白部分
+		longDesc ：	设置或返回指向包含图像描述的文档的 URL。（即alt或者是有文字的图片中的文字）
+		lowsrc ：	设置或返回指向图像的低分辨率版本的 URL。
+		src ：		设置或返回图像的 URL。 --写在onload事件之后
+
+		注：Image属性也有优先级。
+	事件
+		onabort 		//如果图像的加载被中断，则会显示一个对话框：
+		onerror 		错误
+		onkeydown 		键盘按下，所有键
+		onkeypress 		键盘按下，不是别功能键
+		onkeyup 		键盘抬起
+		onload			加载完成
+
+说明
+	ie8及以下、opera 不支持onerror事件
+	Image对象可以直接利用append添加到body里面去

@@ -1,0 +1,9 @@
+cnpm	
+	npm install cnpm -g
+		全局安装cnpm
+
+bower 前端包
+	npm install bower -g
+	cnpm install bower -g
+
+	bower install 包名

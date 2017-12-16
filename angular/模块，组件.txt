@@ -1,0 +1,52 @@
+1--name.module.ts 文件（模块文件）
+	
+	import { BrowserModule } from '@angular/platform-browser';
+			//每个在浏览器中运行的应用的根模块都需要引入BrowserModule
+	import { NgModule } from '@angular/core';
+			//每个模块都需要引入的核心库中的NgModule
+	import { FormsModule } from '@angular/forms';
+			//表单模块，在应用中使用表单时引入
+	import { HttpModule } from '@angular/http';
+			//http模块，当需要进行http远程请求时引入
+
+	import { AppComponent } from './app.component';
+			//自己创建的组件
+
+	@NgModule({
+		//申明属于本模块的组件。组件只能在一个模块中申明
+		declarations: [
+			AppComponent
+		],
+		//引入本模块中用到的模块，自己组件不算
+		imports: [
+			BrowserModule,
+			FormsModule,
+			HttpModule
+		],
+		//声明模块中使用的服务的提供者，暂时还没有用到。
+		providers: [],
+		//根模块中的引导组件，应用启动过程中，会创建这个数组中的组件并插入到HTML中，一般只有一个引导组件。
+		bootstrap: [AppComponent]
+	})
+	export class AppModule { }
+
+
+2--name.component.ts 文件(组件文件)
+
+	import {Component} from '@angular/core';
+			--必须引入
+
+	@Component({
+		selector: 'name',		//组件名<name></name>
+		templateUrl: './a.component.html',
+		styleUrls: ['./a.component.css']
+	})
+
+	export class AppComponent{
+
+	}
+
+
+3--使用组件
+	
+	import {AppComponent} from './app.component'

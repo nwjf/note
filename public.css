@@ -1,0 +1,91 @@
+/*重置样式*/
+
+*{
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+body button {
+	font-size: 16px;
+  font-family: "微软雅黑, Helvetica";
+}
+
+body{
+	background: #fff;
+}
+
+ul,
+li,
+ol{
+  list-style: none;
+}
+
+a,
+input,
+button {
+  text-decoration: none;
+  outline: none;
+}
+
+img,
+button {
+  border-style: none;
+}
+
+/* ios input样式清除 */
+input,
+textarea {
+  border: 0;
+  outline: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+
+/* number样式清除 */
+input[type=number] {
+  -moz-appearance:textfield;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* 上下拉动滚动条时卡顿、慢 */
+body {
+  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
+}
+
+/* ios和android下触摸元素时出现半透明灰色遮罩 */
+a {
+  -webkit-tap-highlight-color:rgba(255,255,255,0);
+}
+
+
+
+
+
+
+
+/*定义样式*/
+.clear:after{
+	content:'';
+	display:block;
+	clear:both;
+	overflow:hidden;
+	visibility:hidden;
+}
+.clear{
+	zoom:1;
+}
+.fl{
+	float: left;
+}
+.fr{
+	float: right;
+}

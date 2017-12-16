@@ -1,0 +1,13 @@
+
+var eventproxy = require('eventproxy');
+	--加载模块，可不写
+var ep = new eventproxy();
+
+ep.all('event1','event2','event3',function(res1,res2,res3){
+	内容
+});
+
+
+function(){
+	ep.emit('event1',res1);
+}

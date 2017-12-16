@@ -1,0 +1,63 @@
+window.location.href = './present.html';
+window.history.back(-1); 
+
+获取地址栏参数(json)
+	let json = window.location.href;
+	json = decodeURIComponent(json); //转码
+	console.log(json);
+	var reg = /\?json=(.*)/;
+	json = reg.exec(json)[1];
+	json = JSON.parse(json)
+	
+获取地址栏参数(自己编写)
+function getUrl(val){
+	let json = window.location.href;
+	json = decodeURIComponent(json); //转码
+	console.log(json);
+	var reg = /\?(.*)/;
+	json = reg.exec(json)[1];
+	json = json.split('&');
+	for(let i=0;i<json.length;i++){
+		json[i] = json[i].split('=');
+	}
+	for(let i=0;i<json.length;i++){
+		if(json[i][0]==val){
+			return json[i][1]
+		}
+	}
+}
+
+
+
+
+function GetRequest() {  
+			    //url例子：XXX.aspx?ID=" + ID + "&Name=" + Name；  
+			    var url = location.search; //获取url中"?"符以及其后的字串  
+			    var theRequest = new Object();  
+			    if(url.indexOf("?") != -1)//url中存在问号，也就说有参数。  
+			    {   
+			      var str = url.substr(1);  
+			        strs = str.split("&");  
+			      for(var i = 0; i < strs.length; i ++) 
+			        {   
+			         theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);  
+			        }  
+			    }  
+			    return theRequest;  
+			}  
+		     var pid=GetRequest().traid;
+
+
+
+防乱码
+getUrl(name);
+function getUrl(key) {  
+		    // 获取参数
+	    var url = window.location.search;
+	    // 正则筛选地址栏
+	    var reg = new RegExp("(^|&)"+ key +"=([^&]*)(&|$)");
+	    // 匹配目标参数
+	    var result = url.substr(1).match(reg);
+	    //返回参数值
+	    return result ? decodeURIComponent(result[2]) : null; 
+		} 

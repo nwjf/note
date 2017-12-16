@@ -1,0 +1,4 @@
+String.prototype.ToUnicode = function (str) {
+    return escape(str).replace(/%u/gi, '\\u');//如果不替换,输出格式为:%uxxxx%uxxxx
+}
+alert(String.prototype.ToUnicode("我爱你"));

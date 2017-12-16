@@ -1,0 +1,85 @@
+XMLHTTPRequest 对象
+
+	1.创建XMLHTTPRequest对象
+
+		if (window.XMLHttpRequest){
+			// code for IE7+, Firefox, Chrome, Opera, Safari
+			xmlhttp=new XMLHttpRequest();
+			//针对某些特定版本的mozillar浏览器的bug进行修正。
+			if (xmlhttp.overrideMimeType){
+				xmlhttp.overrideMimeType('text/xml');
+			};
+		}else{
+			// code for IE6, IE5
+			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+
+	2.注册回调函数
+		xmlhttp.onreadystatechange = callback;
+
+	3.设置连接信息。
+		//open第一个参数链接方式，第二是url地址，true是异步链接
+		//xmlhttp.open("GET","xhr.php?name=" + username,true);
+
+		//使用post方式发送数据
+		xmlhttp.open("POST","xhr.php",true);
+
+		//post需要自己设置http的请求头
+		xmlhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+
+	4，发送数据，开始和服务器进行交互
+		//中如果true, send这句话会立即执行
+		//如果是false（同步），send会在服务器数据回来才执行
+		//xmlhttp.send(null);
+		//因为是get所以send中不需要内容
+		xmlhttp.send('name=' +username);
+
+	5.写回调函数,不同相应状态进行处理
+		function callback(){
+			alert(xmlhttp.readyState);
+			//判断对象状态是交互完成，接收服务器返回的数据
+			if (xmlhttp.readyState==4 && xmlhttp.status==200){
+				//["dada","xiaoyin","liujie"]
+				//纯文本的数据
+				var responseText = xmlhttp.responseText;
+				var divNode = document.getElementById('result');
+				//6.将服务器的数据显示在客户端
+				divNode.innerHTML = responseText;
+			}
+		}
+
+
+
+var ajax = new XMLHttpRequest()
+ajax.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+        console.log(this.responseText);
+    }
+}
+ajax.open('GET', './action.json', true)
+ajax.send()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var ajax = new XMLHttpRequest();
+ajax.open("POST", url, true);
+ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); 
+		// 发送信息至服务器时内容编码类型
+ajax.onreadystatechange = function () {
+	if (ajax.readyState == 4 && (ajax.status == 200 || ajax.status == 304)) {  // 304未修改
+		fn.call(this, ajax.responseText);
+	}
+};
+ajax.send(data);

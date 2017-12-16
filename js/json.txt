@@ -1,0 +1,76 @@
+json   
+	js  ie8+
+
+		JSON.stringify(obj)		字符串转为json。
+		JSON.parse(string)		json转为字符串；
+
+
+	jquery
+
+		jQuery.parseJSON( json )		解析为js对象
+		jQuery.stringifyJSON(obj)		转为json对象
+
+jsonp	跨域请求
+		import JSONP from 'jsonp'
+	
+	js
+		JSONP.get('url',{data参数},function(error,data){},'cb')
+
+	jquery
+
+		$.getJSON(url,data,function(data){})
+			地址，参数，回调函数
+
+vue 跨域
+	
+	1.axios
+		请求是只允许请求允许的数据，设置header：Access-Control-Allow-origin : "*"
+
+	2.axios
+		下载包 axios.js 	bower install axios/npm install axios
+		引入 	<script src='./axion.min.js'></script>
+
+
+		var http = axios.create({
+		 	baseURL: 'https://api.example.com'
+		 	headers : {'DAIWAN-API-TOKEN':'ABB66-BF432-601DE-C1430'}
+		})
+
+
+
+		axios.get(url,{params:{data}})		
+				//url =>  /topic
+				请求方式:   get / post / all(处理并发请求);
+		.then(function(data){}.bind(this)))			//返回的数据
+		.catch(function(error){});		//返回错误，错误信息
+			//添加this
+
+		//配置全局属性
+		
+		axios.defaults.baseUR = 'https://api.example.com';
+
+
+		import axios from 'axios'
+
+		// 创建基本的axios配置
+		var $http = axios.create({
+			baseURL : 'https://www.vue-js.com/api/'
+		});
+
+		// 挂载到vue的原型
+		Vue.prototype.$http = $http;
+
+
+	axios服务器代理
+		webpack.config.js文件中写入 devServer对象中
+
+
+		proxy:{
+			'/afd/api' : {
+				target : 'http://api.avatardata',
+				changeOrigin : true,
+				pathRewrite:{
+					'^/afd/api':'/'
+				}
+			},{多个}
+		}

@@ -1,0 +1,6 @@
+audio			相关笔记
+
+	audio.play()						//播放音乐
+	audio.pause()						//暂停播放
+	audio.currentTime = n		//从哪里开始播放（秒）；
+	a = audio.duration			//音频的总时长(秒)

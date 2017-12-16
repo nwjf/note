@@ -1,0 +1,27 @@
+加载模块
+	var session = require('express-session');
+	var flash = require('connect-flash');
+		--依赖于session
+
+	//中间件
+
+	app.use(session({
+		secret: 'keyboard cat',
+			--随便写，加密字符串
+		rolling : true,		
+			--用户有操作从新计算生存时间
+		resave: false,
+		saveUninitialized: true,
+		cookie: { 
+			secure: true ,
+			maxAge:1000*60*10
+		}
+	}));
+	app.use(flash());
+
+
+	挂载全局变量
+	app.use(function(req,res,next){
+		res.locals.errorInfo = req.flash('errorInfo');
+		next();
+	});

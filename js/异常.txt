@@ -1,0 +1,47 @@
+﻿一、捕获异常
+	1、onError		兼容性好，报错信息不全
+	2、try catch	报错信息全，需要写入代码，比较麻烦
+	3、throw		可以抛出任何对象
+
+
+
+
+
+1.onerror
+	onerror=handleErr
+		var txt=""
+
+		function handleErr(msg,url,line){
+			//	三个参数 
+			//	msg --错误信息,
+			//	url --错误的地址
+			//	line --错误的行
+			txt="There was an error on this page.\n\n"
+			txt+="Error: " + msg + "\n"
+			txt+="URL: " + url + "\n"
+			txt+="Line: " + l + "\n\n"
+			txt+="Click OK to continue.\n\n"
+			console.log(txt)
+			return false;
+			//返回false显示错误信息，返回true，不返回错误信息
+		}
+
+	EvalError:		 raised when an error occurs executing code in eval() 
+	RangeError:		 raised when a numeric variable or parameter is outside of its valid range 
+	ReferenceError:	 raised when de-referencing an invalid reference 
+	SyntaxError:	 raised when a syntax error occurs while parsing code in eval() 
+	TypeError:		 raised when a variable or parameter is not a valid type 
+	URIError:		 raised when encodeURI() or decodeURI() are passed invalid parameters 
+
+	上面的六种异常对象都继承自Error对象。他们都支持以下两种构造方法: 
+		new Error();
+		new Error("异常信息"); 
+
+	Error具有下面一些主要属性：
+		description: 	错误描述 (仅IE可用).
+		fileName:		出错的文件名 (仅Mozilla可用).
+		lineNumber: 	出错的行数 (仅Mozilla可用).
+		message: 		错误信息 (在IE下同description)
+		name: 		错误类型.
+		number: 	错误代码 (仅IE可用).
+		stack: 		像Java中的Stack Trace一样的错误堆栈信息 (仅Mozilla可用).

@@ -1,0 +1,8 @@
+﻿this.$router.push({name: 'newvisitors',params:{data: this.newData}});
+this.$router.go(-1)
+this.$route.params.data
+路由正常写
+
+
+this.$route.query.id
+			获取url

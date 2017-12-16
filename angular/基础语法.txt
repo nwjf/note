@@ -1,0 +1,78 @@
+﻿
+1.angular语法
+	
+	*ng-
+
+
+	{{}}
+
+		1	*ngFor='let item of arr';
+			*ngFor='let item of arr;let i=index'
+			*ngFor='let item of arr;let i=index;trackBy:show'  		//数据改变避免不必要的节点重复遍历（待测试）
+					ts文件
+					show(index: number, hero: Hero): number { return hero.id; }
+
+		2	*ngIf = '变量';
+
+		3	[ngSwitch]='变量'			--父级节点
+				*ngSwitchCase='a'		//变量值与 a 相等显示  --子级节点
+				*ngSwitchDefault			//没有匹配结果显示
+
+1-数据绑定
+
+			单向   数据到 dom
+				{{}}
+				[value]='变量'
+				bind-value = '变量'
+
+			单向   dom 到数据
+				(value)='变量'
+				on-value = '变量'
+
+			双向
+				[(value)]= '变量'
+				bindon-value = '变量'
+
+2-事件
+
+			1  (click)= 'delete()'
+
+			2  on-click='delete()'
+
+
+				(click)='a()'		//单击事件
+				(keyup)='a($event)'		//键盘按下事件
+				blur		//失去焦点
+			
+3-类名
+
+			1  [class] = '变量'
+
+			2  [class.类名] = '判断真假'
+
+			3  [ngClass] = 'sClass'
+					数据
+						sClass={
+							'class1' : true或者变量,
+							'class2' : true或者变量
+						}
+4-样式css
+
+			1  [style.color]="'red'"
+
+			2  [style.background-color]="true?'red':'red'"
+
+			3  [style.font-size.%]="10"
+
+			4  [ngStrle]='sStyle'
+					数据
+						sStyle={
+							'font-size': true?12:11,
+							'color': 'red'
+						}
+
+5-模板变量（作用域：整个模板，不可重复定义）
+			
+			#变量名				如#tel
+				\\模板变量表示当前的节点dom，如tel.value\tel.from
+				\\可以在后面时间中使用此变量

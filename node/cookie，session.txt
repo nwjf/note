@@ -1,0 +1,58 @@
+一、cookie
+	
+	var cookieParser = require('cookie-parser');
+			--引入cookie模块
+	app.use(cookieParser());
+			--中间件
+
+	res.cookie('username','名字',{
+		path:'/',				//约定生效路径
+		maxAge:1000*60			//cookie的生存时间
+	});
+			--设置cookie
+	res.clearCookie('username',{path:'/'});
+			--清除指定cookie
+
+二、session
+	
+	var session = require('express-session');
+			--加载session模块
+
+	app.use(cookieParser());
+			--cookie中间件 - 可不写，老版本需求
+	app.use(session({
+		secret : 'suibianxie',		//加密字符串，随便写
+		rolling : true,			
+				--//用户有在存活时间内有操作从新计算生存时间
+		resave: false,
+		saveUninitialized: true,
+		cookie : {
+			path :'/',
+			maxAge : 1000*60*2
+		}
+	}));
+			--session中间件  一般写在cookie中间件后
+
+	// delete req.session.memeda;
+		--消除指定的session
+	// 销毁全部的session
+	req.session.destroy();
+
+
+
+
+
+
+
+	app.use(function(req,res,next){
+		res.locals.user = req.session.user;
+			--在ejs模板中，使用user表示req.session.user
+		next();
+			--移交权限
+	});
+			--将储存的session信息，赋值给一个全局变量res.locals
+
+	req.session.user = {
+		username : req.body.username
+	};
+			--储存到session中

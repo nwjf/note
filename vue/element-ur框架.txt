@@ -1,0 +1,99 @@
+UI(UserInterface)框架：
+	element-ui
+		针对于vue 2.0
+
+	生成项目：
+		vue init webpack-simple ele-ui
+
+	1.下载element-ui 和  vue-router 
+		npm i element-ui -S
+		npm i vue-router -D
+
+			注意：
+				i		install
+				-S		--save
+				-D		--save-dev
+
+	2.下载	style-loader
+		npm i style-loader -D
+
+	
+	3.main.js中
+
+		// 引入elejs
+		import ElementUI from 'element-ui'
+
+		// 引入ele css
+		import 'element-ui/lib/theme-default/index.css'
+
+		// ele JS需要use
+		Vue.use(ElementUI)
+
+
+	4. 将 .babelrc 修改为：(全部修改)
+
+		{
+		  "presets": [
+		    ["env", { "modules": false }]
+		  ]
+		}
+		
+
+	5. webpack.config.js  文件添加
+		  {
+	        test: /\.css$/,
+	        loader: 'style-loader!css-loader'
+	      },
+	      {
+	        test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
+	        loader: 'file-loader'
+	      },
+
+
+
+
+引入Element
+		1. 完全引入
+
+注意报错信息：
+	1.错误信息 
+	~/._element-ui@1.3.7@element-ui/lib/theme-default/index.css
+Module parse failed: D:\wamp\www\H5-25\lesson75_vue\ele-ui\node_modules\._element-ui@1.3.7@element-ui\lib\theme-default\index.css Unexpected character '@' (1:0)
+You may need an appropriate loader to handle this file type.
+	错误原因：引入的css文件不能正确识别
+	解决办法：引入解析css的loader
+
+
+	2. <h1>修改webpack.config.js配置必须手动重启！！！</h1>
+
+
+	3. 错误信息
+		./~/._element-ui@1.3.7@element-ui/lib/theme-default/fonts/element-icons.woff?t=1472440741
+Module parse failed: D:\wamp\www\H5-25\lesson75_vue\ele-ui\node_modules\._element-ui@1.3.7@element-ui\lib\theme-default\fonts\element-icons.woff?t=1472440741 Unexpected character '
+You may need an appropriate loader to handle this file type.
+		错误原因：字体图标文件未被正常解析
+		解决办法：加载专门解析字体文件的loader file-loader
+
+
+	4. 最终压缩css时将样式设置为内联样式
+		loader ---> style-loader
+
+		下载style-loader
+			cnpm i style-loader -D
+
+		设置解析css的loader
+			同时需要css-loader/style-loader
+			书写的时候必须：
+				{
+					test : /\.css$/,
+
+					// 多个loader之间使用!连接
+					loader : 'style-loader!css-loader'
+				}
+
+
+----------------------------------
+created 只是在页面第一次加载时进行触发
+	1. 如果是相同的路由，不同的参数
+		Vue选择是复用，不会重新加载页面
+		watch 监测 $route

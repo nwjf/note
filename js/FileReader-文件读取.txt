@@ -1,0 +1,85 @@
+一、file 对象
+		在 HTML 文档中 <input type="file"> 标签每出现一次，一个 FileUpload 对象就会被创建。
+	var file = event.target.files[0];
+		第一个文件
+		
+二、FileReader 构造方法
+	FileReader 对象允许Web应用程序异步读取存储在用户计算机上的文件（或原始数据缓冲区）的内容，使用 File 或 Blob 对象指定要读取的文件或数据。
+
+	var reader = new FileReader();	//创建对象
+
+
+	方法
+		abort()					
+			中止该读取操作.在返回时,readyState属性的值为DONE.
+		readAsArrayBuffer()		
+			--开始读取指定的Blob对象或File对象中的内容. 当读取操作完成时,readyState属性的值会成为DONE,如果设置了onloadend事件处理程序,则调用之.同时,result属性中将包含一个ArrayBuffer对象以表示所读取文件的内容.
+		readAsBinaryString()
+			开始读取指定的Blob对象或File对象中的内容. 当读取操作完成时,readyState属性的值会成为DONE,如果设置了onloadend事件处理程序,则调用之.同时,result属性中将包含所读取文件的原始二进制数据.
+		readAsDataURL()
+			开始读取指定的Blob对象或File对象中的内容. 当读取操作完成时,readyState属性的值会成为DONE,如果设置了onloadend事件处理程序,则调用之.同时,result属性中将包含一个data: URL格式的字符串以表示所读取文件的内容.
+			读取为base64
+			data:image/jpeg;base64,		开头
+		readAsText()
+			开始读取指定的Blob对象或File对象中的内容. 当读取操作完成时,readyState属性的值会成为DONE,如果设置了onloadend事件处理程序,则调用之.同时,result属性中将包含一个字符串以表示所读取的文件内容.
+
+	事件
+		onabort
+		    当读取操作被中止时调用.
+		onerror
+		    当读取操作发生错误时调用.
+		onload
+		    当读取操作成功完成时调用.
+		onloadend
+		    当读取操作完成时调用,不管是成功还是失败.该处理程序在onload或者onerror之后调用.
+		onloadstart
+		    当读取操作将要开始之前调用.
+		onprogress
+		    在读取数据过程中周期性调用. 
+
+	属性
+		error 		
+			只读。在读取文件时发生的错误.
+		readyState 
+			只读。表明FileReader对象的当前状态. 值为State constants中的一个.
+		result
+			只读。读取到的文件内容.这个属性只在读取操作完成之后才有效,并且数据的格式取决于读取操作是由哪个方法发起的. 
+ 
+获取input文件上传图片base 64 地址；
+	$('input').change(function(){
+		var file =event.target.files[0];
+		var reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.onload = function(event){
+			var url = event.target.result;
+		}
+	});
+
+
+表单文件获取
+
+	function pushImg(obj) {
+    debugger;
+    var url = "upload/"; //访问控制器是upload，后面必须加'/'否则会报错"org.apache.catalina.connector.RequestFacade cannot be cast to org.springframework.web.multipart.Mult...",但是如果是多级的URL【例如XX/XXX/00/upload/0】又没问题了.
+    var param = $("#errorParameter").val();
+ 
+    var files = $("#imageFile").get(0).files[0]; //获取file控件中的内容
+ 
+    var fd = new FormData();
+    //设置数据
+    fd.append("errContent", "XXXXXX");
+    fd.append("errPic", files);
+    $.ajax({
+        type: "POST",
+        contentType:false, 
+        //必须false才会避开jQuery对 formdata 的默认处理 , XMLHttpRequest会对 formdata 进行正确的处理
+        processData: false, 
+        //必须false才会自动加上正确的Content-Type 
+        url: url,
+        data: fd,
+        success: function (msg) {
+        },
+        error: function (msg) {
+        }
+    });
+}

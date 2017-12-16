@@ -1,0 +1,230 @@
+//加载模块
+	var nodemailer = require('nodemailer');
+
+
+	/**
+	* 定义发送邮件验证服务的方法 sendMail()
+	* @param string email 要发送邮件的email地址
+	* @param string username 用户名
+	* @param string _id 用户的_id
+	* @param function cb 接收错误信息的回调函数
+	*/
+	
+	function sendMail(email,username,_id,cb){
+		var transporter = nodemailer.createTransport({
+			//服务器，使用什么邮箱发送
+			host : 'smtp.163.com',
+			auth : {
+				//账户
+				user : '15515963037@163.com',
+				//授权密码，授权码
+				pass : 'youxiang1'
+			}
+		});
+		//设置邮件发送选项
+		var mailOptions = {
+			from : '"cnode官网" <www.baidu.com>',
+			to : email,
+			subject : '欢迎你注册cnode官网，请激活账户',
+			html : '请点击<a href="192.168.125.3/">激活账户</a>,30分内有效'
+		};
+		//发送邮件
+		transporter.sendMail(mailOptions,function(error,info){
+			cb(error);
+		});
+		smtpTransport.close(); // 如果没用，关闭连接池
+	};
+
+	module.exports = sendMail;
+
+
+
+
+
+一. SMTP 代码:
+	SMTP 有一组固定的响应代码，表示邮件服务器对于传送邮件要求的响应状况。其中 421、450、451、452、550、551、552、553、554 等 9 组代码表示您要求邮件服务器执行的动作不成功。 
+	354 
+	Start Mail input
+	开始传输邮件正文 
+
+	421 
+	<domain> Service not available， closing transmission channel 
+	括号内的主机无法提供正常服务，关闭传送管道，邮件将滞留在主机上 
+
+	440 
+	邮件址错误
+
+	445
+	Server Rejected
+	被封锁
+
+	450 
+	Client host rejected， Cannot resolve PTR
+	Temporary Process Error 
+	Resource temporarily unaviable，please try again later 
+	Requested mail action not taken： mailbox unavailable 
+	无法 IP 反查
+
+	Requested mail action not taken： mailbox unavailable 
+	所要求的邮件动作无法执行：邮件信箱无法提供服务，邮件将滞留在主机上
+	451 
+	Domain of sender address sender@mail.com.tw does not resolve
+	qq trouble creating files in queue (#4.3.0) 
+	queuename： Cannot create "qfCAA21081" in "/var/spool/mqueue" (euid=0)： No space left on device 
+	Requested action aborted， errno=28. 
+	无法解析寄件者邮件地址
+
+	Requested action aborted： local error in processing 
+	要求动作中断：本地端错误
+
+	Requested action aborted,errno=28
+	传送失败，检查网络问题。
+
+	452 
+	Message for would exceed mailbox quota
+	Requested action not taken： insufficient system storage 
+	要求动作无法执行：系统空间不足 
+
+	Insufficient system storage
+	在使用Esmtp认证的过程中出错，检查一下Esmtp设置，多试几次。
+
+	454 
+	Client was not authenticated 
+	安全因素，被封锁
+
+	472 
+	sender@mail.com.tw no DNS A-data returned 
+	无法 IP 反查
+
+	501 
+	Domain of sender address sender@mail.com.tw does not exist
+	无法 IP 反查
+
+	Mailbox not found 
+	5.1.1 ... User unknown 
+	无此使用者
+
+	Syntax error，parameters in command "RCPT TO：min@laohuyatse.com.tw>"unrecognized or missing 
+	no local part 
+	Syntax error in recipient： 
+	"@" or "." expected after "CC"
+	"@" or "." expected after "fau" ：
+	email格式l错误
+	503 
+	Either sender or receiver must be local account.
+	安全因素，权限不足
+	CAT@MAIL.FORTEK.COM.TW 
+	无此使用者，不是本主机转送信件的使用者
+
+	error:needmail command 
+	need mail before RCPT 
+	Bad sequence of commands 
+	消息命令顺序出错，一般出现在其他错误之后，先检查之前出现的错误提示。 
+
+	5.0.0 polite people say HELO first 
+	传输中的语法错误，原因不明
+	505 
+	client was not authenticated 
+	使用263.net和sohu.com的Smtp服务器时，不但要用自身的邮箱发信，而且要加入身份验证，所以即要在"个人信息"中填写正确邮箱地址，又要选中"SMTP服务器需要认证"。
+
+	521 
+	This system is configured to reject mail from 211.20.70.148 
+	安全因素，被封锁
+
+	535 
+	Error:authenticatin failed
+	Authentication unsuccessful 
+	在使用Esmtp认证的过程中出错，检查一下Esmtp设置，多试几次。
+
+	550 
+	unknown user
+	User unknown
+	Invalid User
+	Recipient unknown
+	Mailbox disabled for this recipient
+	Unknown local part 
+	Invalid recipient
+	Unable to relay for no such user 
+	Recipient unknown
+	This account is not allowed
+	recipient unknown
+	No such mail drop defined，user disabled
+	I don't know
+	Relaying is prohibited
+	Relaying denied
+	relaying mail to <> is not allowed 
+	<>... relaying denied 
+	5.7.1 relaying not permitted: 
+	REJECT SMTP Protocol Returned a Permanent Error 550 Forwarding percent hack is not permitted
+	Requested action not taken： mailbox unavailable 
+	无此使用者,所要求动作无法执行：信箱不存在，邮件将退回给寄件者,或者限制了收件人的地址，只能换一个Smtp服务器。
+
+	System is busy
+	邮件系统错误
+
+	Subj similar too many!!
+	太多同主题信件
+
+	Relaying denied. IP name lookup failed
+	IP name lookup failed 
+	DNS FAILURE 
+	cannot route to sender address 
+	无法 IP 反查
+
+	Relaying denied 
+	Mailbox unavailable： This site may not be used as a relay agent. 
+	无法转寄
+
+	<>:local user only 
+	<>:Invalid User 
+	Invalid recipient 
+	使用163.net，163.com，yeah.net和netease.com之类的Smtp服务器时，只能用自身的信箱发信，所以要在Outlook Express的"帐户属性"中的"个人信息"里面填写正确的邮件地址。 
+
+	Unable to relay for ...
+	多出现在用Wingate代理服务器发送邮件时。虽然在Wingate中"POP3 邮箱帐号"要使用"用户名#POP3地址"的格式，但在"帐户属性"中的"个人信息"中还是要填写一般的格式。
+
+	551 
+	we do not relay ...
+	delivery not allowed to non-local recipient
+	无法转寄，使用21cn.com，china.com，371.net，sina.com等大多数信箱的smtp服务器时，只能用自身的信箱发信，所以要在Outlook Express的"帐户属性"中的"个人信息"里面填写正确的邮件地址。 
+
+	User not local; please try <forward-path> 
+	邮件服务器知道使用者不属于本地端，将尝试括号内的转送路径
+
+	552 
+	Requested mail action aborted： exceeded storage allocation 
+	所要求的动作中断：超出所分配的储存空间，邮件将退回给寄件者 
+	Sorry， we don't allow mail from your host. 
+	被封锁
+
+	553 
+	sorry， that domain isn't in my list of allowed rcpthosts 
+	mailbox name not allowed 
+	邮件地址错误
+	Requested action not taken： mailbox name not allowed 
+	sorry, your envelop sender is in my badmailfrom list 
+	所要求的动作未执行：信箱不允许该动作执行 ，或者服务器限制了收件人的地址，只能换一个smtp服务器发信。
+
+	Relay restriction. 
+	From <>, message blocked. 
+	sorry,you are not allow to use this SMTP to relay your eami 
+	sorry, that domain isn't in my list of allowed rcpthosts 
+	使用21cn.com，china.com，371.net，sina.com等大多数信箱的smtp服务器时，只能用自身的信箱发信，所以要在Outlook Express的"帐户属性"中的"个人信息"里面填写正确的邮件地址。 
+
+	authentication is required to send mail as <> 
+	使用263.net和sohu.com的Smtp服务器时，不但要用自身的邮箱发信，而且要加入身份验证，所以即要在"个人信息"中填写正确邮箱地址，又要选中"SMTP服务器需要认证"。
+
+	<>...domain name required 
+	多出现在用Wingate代理服务器发送邮件时。虽然在Wingate中"POP3 邮箱帐号"要使用"用户名#POP3地址"的格式，但在"帐户属性"中的"个人信息"中还是要填写一般的格式。
+
+	554 
+	delivery error： dd This user doesn't have a yahoo.com account 
+	delivery error： dd Sorry， your message to xxxxyahoo.com cannot be delivered. This account is over quota.
+	无此使用者
+
+	Transaction failed 
+	传送失败，检查网络问题。
+
+	571 
+	we don't accept junk mail (mail.sysnet.net.tw)
+	无效的寄件者

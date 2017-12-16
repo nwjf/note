@@ -1,0 +1,11 @@
+git bash
+	
+	进入node环境REPL(js环境)
+		node
+	退出node管家
+		.exit
+		ctrl + c 	两次
+
+
+
+	clear 清屏

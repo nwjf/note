@@ -1,0 +1,9 @@
+
+
+		ngOnInit(){} 							//加载完执行（执行一次）
+
+		ngOnDestroy(){}          //组件销毁之前执行
+
+		ngOnChanges(changes: SimpleChanges){}						//输入属性发生变化执行（可多次执行）
+
+		ngDoCheck(){}						//angular自身无法捕获的变更执行

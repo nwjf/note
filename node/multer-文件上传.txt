@@ -1,0 +1,190 @@
+一、multer  文件上传
+	
+	var multer = require('multer');
+			--加载文件上传模块
+
+	var storage = multer.diskStorage({
+		destination : './uploads',
+			--//储存的文件，要存在那个文件里, ./表示根目录
+		filename : function(req,file,cb){
+			var filename = timestamp('YYYYMMDDHHmmssms')+uid(10)+path.extname(file.originalname);
+				--timestamp  	时间戳模块20170524
+				--uid(10)		随机字符模块
+				--path			路径模块
+
+			cb(null,filename);
+				--存储
+		}
+		
+	});
+		--声明一个储存对象的引擎，，上边的
+
+		//定义函数upload，储存对象
+	var upload = multer({
+		storage : storage,
+			--储存引擎
+		limits : {fileSize : 1024*400},
+			--限制上传的文件的大小(以字节为单位)
+		fileFilter : fileFilter
+			--上传文件的类型，函数
+	}).single('userpic');
+		--定义一个储存的对象，上传单个文件
+		--single()  一张图片，一个文件
+		--array()  多张图片，多个文件
+
+
+	//路由方面写法
+	router.post('/upload',function(req,res){
+		//调用上传函数 upload
+		upload(req,res,function(err){
+			--err	接受错误信息
+				code : 'LIMIT_FILE_SIZE'	文件大小不合适
+				code : 'fileType'	文件类型不合适--自定义的
+			if(err){
+				switch(err.code){
+					case 'LIMIT_FILE_SIZE':
+						var errMsg = '文件太大';
+						break；
+					case 'fileType':
+						var errMsg = '文件类型不对';
+						break;
+				}
+				req.flash('errorInfo',errMsg);
+					--返回一次性数据
+					--新版本取消，使用req.session代替,
+					--或者加载connect-flash模块使用
+				res.redirect('/edit');
+				return;
+			}
+			res.redirect('/');
+		})
+	});
+
+	var allowType = ['image/jpeg','image/png'];
+	function fileFilter(req,file,cb){
+		if(allowType.indexOf(file.mimetype)==-1){
+			//创建一个崔武
+			var error = new Error('错误')；
+			error.code = 'fileType';
+			cb(error,false);
+		}else{
+			cb(null,true);
+		}
+	}
+
+二、timestamp 时间戳
+	下载模块
+	var install time-stamp --save;
+
+	timestamp('YYYYMMDDHHmmssms')
+		--返回当前时间戳==20170524122332
+		--YYYY	年
+		--MM	月
+		--DD	日
+		--HH	时
+		--mm	分
+		--ss	秒
+		--ms	毫秒
+
+三、uid 随机字符
+	下载模块
+	var install uid --save
+
+	uid(10);
+		--返回10位随机字符
+
+
+
+
+四、文件上传模块案例
+
+
+	// 加载模块
+	var multer = require('multer');
+	var timestamp = require('time-stamp');
+	var uid = require('uid');
+	var path = require('path');
+
+
+	/**
+	* 定义文件上传模块 fileUpload()
+	* @param string savePath 文件存储的位置
+	* @param array allowType 允许文件类型
+	* @param number fileSize 允许文件的大小，默认不限制文件大小
+	* 考虑如果有错误怎么办	
+	*/
+	
+	function fileUpload(savePath,allowType,fileSize){
+		// 定义磁盘存储的方式
+		var storage = multer.diskStorage({
+			// 存储位置
+			destination : savePath,
+
+			// 文件名
+			filename : function(req,file,cb){
+				/*
+					定义文件名的命名规则:
+						时间戳+随机数+后缀名
+						time-stamp 模块
+						uid	模块
+						path 模块
+				*/ 
+				var filename = timestamp('YYYYMMDDHHmmssms')+uid(10)+path.extname(file.originalname);
+
+				// 存储	
+				cb(null,filename);
+			}
+		});
+
+		// 定义文件过滤的函数
+		function fileFilter(req,file,cb){
+			/*
+				file信息中，包含了文件的类型 file.mimetype
+			*/ 
+
+			// allowType 包含了允许的文件类型数组
+			if(allowType.indexOf(file.mimetype)==-1){
+				// 没有
+				cb(null,false);
+
+				// 传递错误信息
+				var error = new Error('类型不合适');
+				error.code = 'fileFilter';
+
+				// 传递错误
+				cb(error);
+			}else{
+				cb(null,true);
+			}
+
+		}
+
+		// 定义条件
+		var options = {
+			// 定义存储的位置和文件名
+			storage : storage,
+
+			// 文件类型
+			fileFilter : fileFilter,
+
+			// 大小限制
+			limits : {
+				// fileSize : fileSize
+			}
+		}
+
+		// 判断fileSize是存在的
+		if(fileSize){
+			// 设置限制的文件大小
+			options.limits.fileSize = fileSize;
+		}
+
+		// 创建存储对象
+		var upload = multer(options);
+
+		// 返回文件上传对象
+		return upload;
+	}
+
+	// 向外暴露
+	module.exports = fileUpload;

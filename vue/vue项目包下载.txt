@@ -1,0 +1,26 @@
+﻿npm init -yes				//创建package.json文件
+
+npm install vue --save		//vue包
+
+npm install vue-router --save
+
+npm install webpack --save-dev
+		-/- webpack 模块打包
+		-/- webpack -p执行混淆压缩
+		--  node_modules/.bin/webpack -p
+
+npm install vue-loader --save-dev
+npm install css-loader --save-dev
+npm install vue-template-compiler --save-dev
+		-- .vue文件识别
+
+npm install axios --save
+		-- axios 跨域请求数据
+
+
+bower 包管理器(前端)
+	
+	npm install bower -g
+
+npm install jsonp
+		--  jsonp 跨域请求

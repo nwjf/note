@@ -1,0 +1,54 @@
+1、config 文件下 db_config.js---链接数据库
+	
+
+	var mongoose = require('mongoose');
+			--加载模块
+	var dbUrl = 'mongodb://cnode:123@127.0.0.1:27017/cnode';
+			--链接cnode数据库
+	mongoose.connect(dbUrl,function(error){
+		if(error){
+			console.log('数据库连接失败...');
+		}
+	});
+
+	module.exports = mongoose
+
+
+2、models 文件下 userModel.js---定义集合骨架
+	
+	var mongoose = require('../config/db_config');
+			--加载链接数据库文件
+	var userSchema = new mongoose.Schema({
+		username : {
+			type : String,		//类型--String/Number/Date/ObjectId/
+			unique : true,		//是否唯一，不能重复
+			default : ''		//默认值
+		},
+		reply : [
+			{
+				type :,
+				ref : 'user',	//关联集合
+			},{
+				type
+				ref
+			}
+		]
+	});
+
+	var userModel = mongoose.model('users',userSchema);
+		--users  	操作的数据库集合，操作复数
+
+	module.exports = userModel;
+		--向外暴露模块
+
+3、controllers 文件下 indexController.js	控制器
+		也是路由的控制器文件
+
+	var userModel = require('../models/userModel');
+
+	数据库操作
+	userModel.find(function(error,data){
+		error --错误信息
+		data  --查询出来的数据
+	});
+	
