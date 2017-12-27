@@ -29,3 +29,9 @@
     版本
         $ vue --version
         2.8.2
+
+
+npm init        新建一个.json文件
+npm list        查看所有安装的包
+npm prune        移除项目不依赖的包
+npm outdated        查看哪些包过时了
