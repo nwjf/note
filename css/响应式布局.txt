@@ -1,4 +1,4 @@
-<meta name="viewport" content="width=device-width" initial-scale="1">
+﻿<meta name="viewport" content="width=device-width" initial-scale="1">
 
 @media screen and (min-width: 960px){}
 @media screen and (min-width: 600px) and (max-width: 960px){}
@@ -13,3 +13,9 @@ white-space:nowrap;        /* 不换行 */
 overflow:hidden;           /* 内容超出宽度时隐藏超出部分的内容 */
 text-overflow:ellipsis;         
 /* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+
+
+
+!important			//权重
+clac();			//执行运算
+vw/vh		//视图高度、宽度

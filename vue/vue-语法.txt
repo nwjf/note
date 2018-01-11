@@ -33,9 +33,6 @@ vue
 			//定义方法
 		methods : {},//定义方法的地方
 
-			//生命周期，穿件Vue对象完毕时
-		created : function(){},
-
 			//计算属性
 		computed : {},
 
