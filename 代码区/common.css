@@ -73,7 +73,7 @@ a {
 
 
 /*定义样式*/
-.clear:after{
+.clearfix:after{
 	content:'';
 	display:block;
 	clear:both;
