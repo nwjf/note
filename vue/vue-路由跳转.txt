@@ -1,8 +1,18 @@
-﻿this.$router.push({name: 'newvisitors',params:{data: this.newData}});
-this.$router.go(-1)
-this.$route.params.data
-路由正常写
+﻿路由-html
+
+	<router-link to=""></router-link>
+	<router-link :to="path"></router-link>
+	<router-link :to="{name:'', params: {参数}}"></router-link>
+	<router-link :to="{path:'/name', query: {参数}}"></router-link>
+
+路由-js
+
+	this.$router.go(-1);				// 页面返回
+	this.$router.push({name:'路由名', params: {}});
+	this.$router.push({path:'路由路径', query: {}});
 
 
-this.$route.query.id
-			获取url
+获取参数
+
+	this.$route.params.id;
+	this.$route.query.id;
