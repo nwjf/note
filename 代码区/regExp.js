@@ -2,7 +2,7 @@
  * @Author: wjf 
  * @Date: 2018-01-14 14:50:23 
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2018-01-14 15:29:11
+ * @Last Modified time: 2018-01-14 17:42:06
  */
 
 // 文本（最短长度1）
@@ -17,7 +17,7 @@ export const phoneReg = /^1[3-9]\d{9}$/;
 export const emailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9-])+((\.[a-zA-Z0-9-]{2,3}){1,2})$/;
 // 密码（6位数字密码）
 export const pwdReg = /^\d{6}$/;
-// 登录密码（6-20位数字_-@#*+.）
+// 登录密码（6-20位数字字母_-@#*+.）
 export const loginPwdReg = /^[0-9a-zA-Z#@*-+_\.]{6,20}$/;
 
 /*
