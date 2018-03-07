@@ -1,0 +1,60 @@
+=========================================================================
+=========================================================================
+
+
+$width: 200px;
+$width: 1.5 !default;         // 默认变量(只是一个默认值，没有覆盖就生效，否则使用覆盖值)
+
+属性嵌套写法
+    .name{
+      font{
+        size: 16px;
+        weight: bold;
+      }
+    }
+
+
+@extend .class5;          // 继承class5
+
+
+代码块复用
+
+    @mixin text6 {
+        height:50px;
+        left:20px;
+    }
+    .text6M{
+        @include text6;
+    }
+
+函数
+    @function double ($number){
+        @return $number*2;
+    }
+    .text9{
+        font-size:double(20px);
+    }
+
+
+
+//for 循环
+@for $i from 1 to 5 {
+    .item-#{$i} {
+        border:#{$i}px solid;
+    }
+}
+//while 循环
+$m:8;
+@while $m > 0 {
+    .items-#{$m} {
+        width:2em*$m;
+    }
+    $m:$m - 2 ;
+}
+//这里可以对$m进行运算 让它每次都减去2
+//each 语法
+@each $img in q,w,e,r {
+    .#{$img} {
+        background-image:url('#{$img}.png')
+    }
+}
