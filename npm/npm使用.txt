@@ -1,0 +1,19 @@
+npm install package         安装包
+npm install package@3.2.1         安装包,指定版本
+npm install package -g      全局安装
+npm list -g                 查看所有全局安装的模块
+npm uninstall package       卸载包
+npm update package          更新包
+npm search package          搜索模块
+
+npm init            初始化项目，新建项目
+npm adduser         注册用户
+npm help            帮助，查看所有命令
+
+-S, --save                出现在依赖包中
+-D, --save-dev            包将出现在您的dev依赖性中
+-O, --save-optional       包将出现在您的option依赖性中
+
+
+淘宝镜像
+npm install -g cnpm --registry=https://registry.npm.taobao.org
