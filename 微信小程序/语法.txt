@@ -16,17 +16,17 @@
 2 设置数据，实时更新--\\\\\\\
 
 		this.setData({
-			topic:topic
+			topic: topic
 		})
 
 3 全局变量使用--\\\\\\\\
 	
 		app.js
-			globalData: {
-			    date: []
-			  },
+			globalData: {},
+			commonUrl: '',
 		其他页面
-			let newDate =  getApp().globalData.date;
+			let app = getApp();
+			let commonUrl = app.commonUrl;
 			this.setGlobalData({
 				date: dateTime
 			})
@@ -72,3 +72,10 @@
 				
 		用户点击右上角分享
 				onShareAppMessage: function () {}
+
+
+
+13 -样式设置
+	page{
+		相当于body，每个页面的只对当前页面生效
+	}
