@@ -1,0 +1,5 @@
+export                  //  可以多次出现
+
+export default          // 每个文件，模块只能有一个
+
+model.export
