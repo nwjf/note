@@ -1,100 +1,65 @@
-vue  
-	引入Vue文档
+==========================================
+vue.config
+==========================================
 
-	npm run dev		运行程序
-	npm run build 	打包
+	Vue.config.silent = true;					//	取消 Vue 所有的日志与警告。
+	Vue.config.devtools = true;			// 务必在加载 Vue 之后，立即同步设置以下内容,配置是否允许 vue-devtools 检查代码。开发版本默认为 true，生产版本默认为 false。生产版本设为 true 可以启用检查。
+	Vue.config.productionTip = false; // 设置为 false 以阻止 vue 在启动时生成生产提示。
+	Vue.config.debug = true;				// 开启debug
 
-	this.$route.query.id
-			获取url
 
-	beforeCreate（创建前）,
+========================================================
+生命周期
+==========================================================
 
-	created（创建后）,
+	beforeCreate(创建前),						// 没有
+
+	created(创建后),
 
 	beforeMount(载入前),
 
-	mounted（载入后）,
+	mounted(载入后),
 
-	beforeUpdate（更新前）,
+	beforeUpdate(更新前),
 
-	updated（更新后）,
+	updated(更新后),
 
-	beforeDestroy（销毁前）,
+	beforeDestroy(销毁前),
 
-	destroyed（销毁后）
+	destroyed(销毁后),
+
+	data : {},	//定义变量
+
+	methods : {},	//定义方法的地方
+
+	computed : {},	//计算属性
+
+	watch : {}	//监测
+
+	filters : {}	//过滤器
 
 
-		//创建Vue实例
+	//创建Vue实例
 	new Vue({
 		el : '#box',	//绑定器查找
-					//声明变量
-		data : {},//定义变量
-
-			//定义方法
-		methods : {},//定义方法的地方
-
-			//计算属性
-		computed : {},
-
-			//监测
-		watch : {}
-
-			//过滤器
-		filters : {}
-			过滤器使用
-				{{ msg | 过滤器名 }}
-
-				
-
-		// Vue的声明周期 :从页面加载一直到元素绑定，数据创建操作结束，再到vue被销毁
-
-			// 生命周期钩子,在某个特定的阶段监听
-		beforeCreate : function(){
-			console.log('数据还没有创建.....');
-		},
-
-			// 监听加载完毕，使用较多一些！
-		created : function(){
-			console.log('基本的数据、事件初始化完毕，页面加载完毕');
-			页面加载完毕
-		},
-
-		beforeMount : function(){
-			console.log('在挂载元素之前触发!');
-		},
-
-		mounted : function(){
-			console.log('挂载完毕....')
-		},
-
-		beforeUpdate : function(){
-			console.log('数据更新前触发!');
-		},
-
-		updated : function(){
-			console.log('数据更新完毕');
-		},
-
-		beforeDestroy:function(){
-			console.log('vm数据模型在被销毁前触发');
-		},
-
-		destroyed:function(){
-			console.log('VM数据模型已经被销毁了');
-		},
 	});
 
+======================================================
+vue的解析环境
+======================================================
 
-	{{	vue的解析环境	}}
 	v-model=""		将元素的值和指定的变量链接在一起
+
 	v-text=""		将变量的值输出到指定的位置
+
 	v-html=""		解析html文本，输出到指定位置，
-	v-on:click=""	绑定事件
-		--简写  @click=""
-	v-bind:href="msg"	设置属性
-		--简写  :href="msg"
+
+	v-on:click=""	绑定事件--简写  @click=""
+
+	v-bind:href="msg"	设置属性--简写  :href="msg"
 
 	v-show="true"	元素显示true\false,显示隐藏,节点存在
+
 	v-if="true"		
 		判断元素是否产生.
 		ture	产生节点
@@ -102,7 +67,7 @@ vue
 	v-else=""
 
 	
-	v-for="value,index in users"
+	v-for="(value,index) in users"
 		--循环，valse--值
 				index--序号
 				users--循环的数组
@@ -113,28 +78,7 @@ vue
 	this.$emit('memeda',info);	//触发自定义事件，info为参数
 
 
-	router : 路由名
 
-	1·组件注册
-		全局组件
-		Vue.component('组件名',{
-			template : '<h3>这里是组件的内容</h3>'
-		})
-		子组件
-		compontents : {
-			'memeda' : {
-				props : ['a','info'],
-				data : function(){},
-				methods : function(){},
-			}
-		}
-
-	2·模板
-		components : {
-			'模板名' : {
-				data : function(){return{模板变量}}
-			}
-		}
 
 	3·模板嵌套
 		components : {
