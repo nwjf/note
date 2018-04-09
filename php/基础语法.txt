@@ -1,0 +1,30 @@
+变量
+    $a,$b,
+    global $a,$b;   // 访问全局变量
+    $GLOBALS['a'];  // 访问全局变量
+
+    static $a = 0;      // 静态变量，不被清除
+    define("GREETING", "欢迎访问 php.cn");      // 定义常量
+
+    var_dump();  // 数据类型
+
+
+超级全局变量
+
+    $GLOBALS
+
+    $_SERVER
+
+    $_REQUEST
+
+    $_POST
+
+    $_GET
+
+    $_FILES
+
+    $_ENV
+
+    $_COOKIE
+
+    $_SESSION
