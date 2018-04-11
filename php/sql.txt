@@ -1,0 +1,18 @@
+简单查
+  select * from user;
+
+多表联查
+  select user.name,address.city from user,address where user.address_id = address.address_id;
+
+
+删除
+  drop table user;      // 删除表
+  delete from user where id=1   // 删除一条数据
+
+
+插入数据
+  insert into user (openid, name, sex, address_id, phone) 
+  values ('sdfsd', '名字', 1, 2, 15516661555);
+
+修改数据
+  update user set name='测试',sex=2 where id = 27
