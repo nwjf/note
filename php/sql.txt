@@ -3,6 +3,13 @@
 
 多表联查
   select user.name,address.city from user,address where user.address_id = address.address_id;
+  
+  like: 
+    %     代替零个或者更多字符
+    _     代表单个字符（一个字符）
+    []    括号里的任意一个
+    [^]   不在括号里的;
+    select * from user where nickname like '%1%';
 
 
 删除
@@ -16,3 +23,13 @@
 
 修改数据
   update user set name='测试',sex=2 where id = 27
+
+
+php语法
+    var_dump($res->fetch_array());
+      返回索引数组
+    var_dump($res->fetch_row());
+      返回关联数组
+    var_dump($res->fetch_assoc());
+      返回一个对象
+    var_dump($res->fetch_object());
