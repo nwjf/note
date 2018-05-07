@@ -16,7 +16,7 @@ text-overflow: ellipsis;    /* 当对象内文本溢出时显示省略标记(...
 
 
 !important			//权重
-clac();			//执行运算
+calc();			//执行运算
 vw/vh		//视图高度、宽度
 
 
