@@ -8,3 +8,9 @@ hexo d      // 发布
 
 hexo new 'demo' // 创建博客
 hexo new draft 'demo' // 创建草稿
+
+
+
+markdown语法
+    图片    ![tag](链接)
+    链接    [内容](链接)
