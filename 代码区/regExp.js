@@ -2,7 +2,7 @@
  * @Author: wjf 
  * @Date: 2018-01-14 14:50:23 
  * @Last Modified by: wjf
- * @Last Modified time: 2018-05-03 14:33:56
+ * @Last Modified time: 2018-07-16 16:04:03
  */
 
 // 文本（最短长度1）
@@ -23,6 +23,8 @@ export const loginPwdReg = /^[0-9a-zA-Z#@*-+_\.]{6,20}$/;
 export const idCardReg = /^[1-9]\d{9}(0[1-9]|1[12])(0[1-9]|[1-2][0-9]|3[01])\d{3}[0-9Xx]$/;
 // 大于0的数字，包括小树
 export const maxNumReg = /(^[1-9]\d*$)|(^[1-9]\d*\.\d*$)|(^0\.[1-9]\d*$)/;
+// 金额，钱正则，包含两位小数
+export const moneyReg = /(^\d{1,8}$)|(^\d{1,8}.\d{1,2}$)/;
 /*
  * 在下不才，如有不对，请小做修改
  * 如有不能满足需求的请添加
