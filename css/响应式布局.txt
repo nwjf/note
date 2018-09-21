@@ -34,3 +34,19 @@ background: linear-gradient(to bottom, #000000 0%,#ffffff 100%);
 :-moz-placeholder{}                  /* Firefox版本4-18 */
 ::-moz-placeholder{}                  /* Firefox版本19+ */
 :-ms-input-placeholder{}           /* IE浏览器 */
+
+ios input:disabled样式
+
+input:disabled, textarea:diabled {
+    -webkit-text-fill-color: #000;
+    -webkit-opacity: 1;
+    color: #000;
+}
+
+select小三角去掉
+-webkit-appearance: none;
+-moz-appearance: none;
+-ms-appearance: none;
+appearance: none;
+-webkit-tap-highlight-color: #fff;
+outline: 0;
