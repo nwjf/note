@@ -1,0 +1,5 @@
+var input = document.getElementsByClassName('up-img')[0];
+var evt = new MouseEvent("click", {
+    bubbles: false, cancelable: true, view: window
+});
+input.dispatchEvent(evt);
