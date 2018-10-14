@@ -25,6 +25,18 @@ function getUrl(val){
 		}
 	}
 }
+获取地址栏参数，整个对象
+function getParams (url) {
+    url = url.substring(url.lastIndexOf('?') + 1);
+    var reg = /([^?&=]+)=([^?&=]*)/g;
+    var obj = {};
+    url.replace(reg, function (re, $1, $2) {
+        var name = decodeURIComponent($1);
+        var val = decodeURIComponent($2);
+        obj[name] = val;
+    });
+    return obj;
+}
 
 
 
