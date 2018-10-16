@@ -1,0 +1,42 @@
+==========组件========
+
+wxml
+    <view></view>
+json
+    {
+        "component": true
+    }
+wxss
+js
+    Component({
+        options: {
+            multipleSlots: true // 在组件定义时的选项中启用多slot支持
+        },
+        // 传过来参数
+        properties: {
+            // 弹框显示
+            show: {
+                type: Boolean,
+                value: true
+            }
+        },
+        data: { // 弹窗显示控制
+            // 组件内部参数
+        },
+        methods: {
+        } 
+    })
+
+
+触发事件this.triggerEvent('popCallback');
+
+=====调用父级=====
+json
+    {
+        "usingComponents": {
+            "pop": "../../template/pop/pop"
+        }
+    }
+wxml
+    <import src="../../template/pop/pop.wxml" />
+    <pop type="" bind:cancelEvent="父级方法"></pop>
