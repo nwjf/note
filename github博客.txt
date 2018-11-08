@@ -1,4 +1,4 @@
-﻿https://kefirlily.github.io/
+﻿https://nwjf.github.io/
 
 npm install -g hexo // 安装下载
 hexo init   // 初始化
