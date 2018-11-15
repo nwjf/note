@@ -12,6 +12,8 @@ git config --global user.email "邮箱地址"
 
 git add filename	将文件添加到暂存区
 
+git rm --cached * 删除add添加到暂存区的文件（所有）
+
 git diff index.html	
 		查看更改的地方
 		与版本库对比
