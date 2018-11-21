@@ -6,3 +6,6 @@
 创建项目
 
     create-react-app appName
+	
+	
+	npx create-react-app appname
