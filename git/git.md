@@ -5,19 +5,19 @@ git 基本命令使用
 
 ### 
 
-```py
+```shell
 git init        # 初始化git项目
 ```
 
 ## 密钥生成
 
-```py
+```shell
 ssh-keygen -t rsa -C 'info'     # 生成ssh密钥
 ```
 
 ## 用户信息
 
-```py
+```shell
 # 设置全局用户信息
 git config --global user.name 'userName'
 git config --global user.email 'userEmail'
@@ -29,7 +29,7 @@ git config --global --list
 
 ## 分支操作
 
-```py
+```shell
 git branch          # 显示当前分支
 
 git branch -a       # 显示所有分支
@@ -47,7 +47,7 @@ git branch -D dev   # 删除dev分支
 
 ## 日志显示
 
-```py
+```shell
 git log             # 查看日志信息
 git reflog          # 所有日志信息，历史日志
 git log --graph     # 图形化显示版本信息
@@ -56,7 +56,7 @@ git log --graph --pretty=oneline --abbrev-commit # 图形化显示分支信息
 
 ## 状态
 
-```py
+```shell
 git status          # 查看当前状态
 
 git diff            # 查看修改的内容
@@ -65,7 +65,7 @@ git diff fileName
 
 ## 推送设置
 
-```py
+```shell
 git remote add orighin git@github.com   # 建立连接
 
 git remote set-url origin git@github.com # 更新连接
@@ -99,7 +99,7 @@ git fetch
 
 ## 版本回退
 
-```py
+```shell
 git rm --cached *       # 删除git add 添加到暂存区的所有文件
 
 git reset --hard HEAD^  # 回退上一个版本
@@ -124,7 +124,7 @@ git commit --amend
 
 ## git tag setting
 
-```py
+```shell
 git tag v1.0        # 添加标签
 
 git tag             # 查看标签
