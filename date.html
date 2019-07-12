@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>date</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .can {
+            width: 100vw;
+            height: 100vh;
+        }
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        .canvas {
+            background: #eee;
+        }
+        .animation {
+            background: transparent;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+    <div class="can">
+        <canvas class="canvas"></canvas>
+        <canvas class="animation"></canvas>
+    </div>
+</body>
+</html>
+<script>
+    // 矩阵数组
+    var num = [
+        [
+            [0, 0, 1, 1, 1, 1, 0, 0],
+            [0, 1, 1, 0, 0, 1, 1, 0],
+            [1, 1, 0, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 0, 1, 1],
+            [0, 1, 1, 0, 0, 1, 1, 0],
+            [0, 0, 1, 1, 1, 1, 0, 0]
+        ],
+        [
+            [0, 0, 1, 1, 1, 0, 0, 0],
+            [0, 1, 1, 1, 1, 0, 0, 0],
+            [0, 0, 0, 1, 1, 0, 0, 0],
+            [0, 0, 0, 1, 1, 0, 0, 0],
+            [0, 0, 0, 1, 1, 0, 0, 0],
+            [0, 0, 0, 1, 1, 0, 0, 0],
+            [0, 0, 0, 1, 1, 0, 0, 0],
+            [0, 0, 0, 1, 1, 0, 0, 0],
+            [0, 0, 0, 1, 1, 0, 0, 0],
+            [0, 1, 1, 1, 1,10, 1, 0]
+        ],
+        [
+            [0, 1, 1, 1, 1, 1, 1, 0],
+            [1, 1, 0, 0, 0, 0, 1, 1],
+            [1, 0, 0, 0, 0, 0, 1, 1],
+            [0, 0, 0, 0, 0, 0, 1, 1],
+            [0, 0, 0, 0, 0, 1, 1, 0],
+            [0, 0, 0, 0, 1, 1, 0, 0],
+            [0, 0, 1, 1, 0, 0, 0, 0],
+            [0, 1, 0, 0, 0, 0, 0, 0],
+            [1, 1, 0, 0, 0, 0, 0, 1],
+            [1, 1, 1, 1, 1, 1, 1, 1]
+        ],
+        [
+            [1, 1, 1, 1, 1, 1, 1, 1],
+            [0, 0, 0, 0, 0, 0, 1, 1],
+            [0, 0, 0, 0, 0, 1, 1, 0],
+            [0, 0, 0, 0, 1, 1, 0, 0],
+            [0, 0, 1, 1, 1, 1, 1, 1],
+            [0, 0, 0, 0, 0, 0, 1, 1],
+            [0, 0, 0, 0, 0, 0, 1, 1],
+            [0, 0, 0, 0, 0, 1, 1, 1],
+            [0, 0, 0, 1, 1, 1, 0, 0],
+            [1, 1, 1, 1, 0, 0, 0, 0]
+        ],
+        [
+            [0, 0, 0, 0, 1, 1, 0, 0],
+            [0, 0, 0, 1, 1, 1, 0, 0],
+            [0, 0, 1, 0, 1, 1, 0, 0],
+            [0, 1, 0, 0, 1, 1, 0, 0],
+            [1, 0, 0, 0, 1, 1, 0, 0],
+            [1, 0, 0, 0, 1, 1, 0, 0],
+            [1, 1, 1, 1, 1, 1, 1, 1],
+            [0, 0, 0, 0, 1, 1, 0, 0],
+            [0, 0, 0, 0, 1, 1, 0, 0],
+            [0, 0, 0, 0, 1, 1, 0, 0]
+        ],
+        [
+            [0, 1, 1, 1, 1, 1, 1, 1],
+            [1, 1, 0, 0, 0, 0, 0, 0],
+            [1, 1, 0, 0, 0, 0, 0, 0],
+            [1, 1, 0, 0, 0, 0, 0, 0],
+            [1, 1, 1, 1, 1, 1, 1, 0],
+            [0, 0, 0, 0, 0, 0, 1, 1],
+            [0, 0, 0, 0, 0, 0, 1, 1],
+            [0, 0, 0, 0, 0, 0, 1, 1],
+            [0, 0, 0, 0, 0, 0, 1, 1],
+            [1, 1, 1, 1, 1, 1, 1, 0]
+        ],
+        [
+            [0, 0, 0, 0, 1, 1, 1, 1],
+            [0, 0, 1, 1, 1, 0, 0, 0],
+            [0, 1, 1, 0, 0, 0, 0, 0],
+            [1, 1, 0, 0, 0, 0, 0, 0],
+            [1, 1, 0, 0, 0, 0, 0, 0],
+            [1, 1, 1, 1, 1, 1, 1, 0],
+            [1, 1, 0, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 0, 1, 1],
+            [0, 1, 1, 1, 1, 1, 1, 0]
+        ],
+        [
+            [1, 1, 1, 1, 1, 1, 1, 1],
+            [0, 0, 0, 0, 0, 0, 1, 1],
+            [0, 0, 0, 0, 0, 0, 1, 1],
+            [0, 0, 0, 0, 0, 1, 1, 0],
+            [0, 0, 0, 0, 1, 1, 0, 0],
+            [0, 0, 0, 1, 1, 0, 0, 0],
+            [0, 0, 0, 1, 1, 0, 0, 0],
+            [0, 0, 0, 1, 1, 0, 0, 0],
+            [0, 0, 0, 1, 1, 0, 0, 0],
+            [0, 0, 0, 1, 1, 0, 0, 0]
+        ],
+        [
+            [0, 1, 1, 1, 1, 1, 1, 0],
+            [1, 1, 0, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 0, 1, 1],
+            [0, 1, 1, 1, 1, 1, 1, 0],
+            [1, 1, 0, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 0, 1, 1],
+            [0, 1, 1, 1, 1, 1, 1, 0]
+        ],
+        [
+            [0, 1, 1, 1, 1, 1, 1, 0],
+            [1, 1, 0, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 0, 1, 1],
+            [1, 1, 0, 0, 0, 0, 1, 1],
+            [0, 1, 1, 1, 1, 1, 1, 1],
+            [0, 0, 0, 0, 0, 0, 1, 1],
+            [0, 0, 0, 0, 0, 0, 1, 1],
+            [0, 0, 0, 0, 1, 1, 1, 0],
+            [0, 0, 1, 1, 1, 0, 0, 0],
+            [1, 1, 1, 0, 0, 0, 0, 0]
+        ],
+        [
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 1, 1, 1, 0, 0, 0],
+            [0, 0, 1, 1, 1, 0, 0, 0],
+            [0, 0, 1, 1, 1, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 1, 1, 1, 0, 0, 0],
+            [0, 0, 1, 1, 1, 0, 0, 0],
+            [0, 0, 1, 1, 1, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0]
+        ],
+        [
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 1, 1, 1, 1, 0, 0],
+            [0, 0, 1, 1, 1, 1, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0]
+        ],
+        [
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0]
+        ]
+    ];
+</script>
+<script>
+    /**
+     * 此脚本不存在命名空间，见谅
+     * 此特效不存在屏幕适配，见谅
+     * 此脚本随意编写，     见谅
+     * 此脚本不存在新语法， 见谅
+     * 此脚本不考虑性能优化，见谅
+     * 此脚本注释不全，     见谅
+     * 
+     * 
+     * 全局属性
+     * num              矩阵
+     * windowWidth
+     * windowHeight
+     * r                半径
+     * distance         圆点间距
+     * canDom           dom
+     * animationDom     dom
+     * ctx              2d对象
+     * animationCtx     2d对象
+     * animationArr     动画集合
+     * oldDate          老时间，（方便对比）
+     */
+    var windowWidth = document.body.clientWidth;
+    var windowHeight = document.body.clientHeight;
+    var r = 2;
+    var distance = 5;
+
+    var canDom = document.querySelector('.canvas');
+    var animationDom = document.querySelector('.animation');
+    canDom.width = windowWidth;
+    canDom.height = windowHeight;
+    animationDom.width = windowWidth;
+    animationDom.height = windowHeight;
+
+    var ctx = canDom.getContext('2d');
+    var animationCtx = animationDom.getContext('2d');
+
+
+
+    var oldDate = [];
+    var animationArr = [];  // 所有动画集合
+
+    // 万恶的源头
+    +function () {
+        start(getDate().date.split(''));
+        setAnimation();
+        setInterval(
+            function () {
+                start(getDate().date.split(''));
+            },
+            1000
+        );
+    }()
+    
+
+    // 随便编编吧
+    function start(date) {
+        for (var i = 0, len = date.length; i < len; i++) {
+            if (oldDate[i] === date[i]) {
+                continue;
+            }
+            switch (date[i]) {
+                case '0':
+                case '1':
+                case '2':
+                case '3':
+                case '4':
+                case '5':
+                case '5':
+                case '6':
+                case '7':
+                case '8':
+                case '9':
+                    draw(num[date[i]], i, 'number');
+                    break;
+                case '-':
+                    draw(num[11], i);
+                    break;
+                case ':':
+                    draw(num[10], i);
+                    break;
+                case ' ':
+                    draw(num[12], i);
+                    break;
+                default:
+                    break;
+            }
+        }
+        oldDate = date.concat();
+    }
+    // 随便画画吧
+    function draw(matrix, index, type) {
+        var _x = distance * 9 * index;
+        var _y = 20;
+        ctx.clearRect(
+            _x - 2 * r,
+            _y - 2 * r,
+            r * 8 + distance * 7,
+            distance * 11
+        );
+        for (var i = 0; i < matrix.length; i++) {
+            for (var j = 0; j < matrix[i].length; j++) {
+                if (!!matrix[i][j]) {
+                    var x = _x + distance * j;
+                    var y = _y + distance * i;
+                    drawCircle(ctx, x, y, r);
+                    // 动画添加
+                    if (type !== 'number') {
+                        continue;
+                    }
+                    var obj = {};
+                    obj.ctx = animationCtx;
+                    obj.x = x;
+                    obj.y = y;
+                    obj.r = r;
+                    obj.color = ''
+                        + 'rgb('
+                        + randomNum(0, 255)
+                        + ','
+                        + randomNum(0, 255)
+                        + ','
+                        + randomNum(0, 255)
+                        + ')';
+                    obj.sY = randomNum(10, 20) / 4;
+                    obj.sX = randomNum(1, 6) / 4 * Math.pow(-1, randomNum(0, 1000));
+                    obj.endY = r * 9 + distance * 9 + 20;
+                    animationArr.push(obj);
+                    obj = null;
+                }
+            }
+        }
+    }
+    // 设置动画效果
+    function setAnimation() {
+        setInterval(
+            function () {
+                animationCtx.clearRect(0, 0, windowWidth, windowHeight)
+                for (var i = animationArr.length - 1; i >= 0; i--) {
+                    drawCircle(
+                        animationArr[i].ctx,
+                        animationArr[i].x,
+                        animationArr[i].y,
+                        animationArr[i].r,
+                        animationArr[i].color
+                    );
+                    animationArr[i].x += animationArr[i].sX;
+                    animationArr[i].y += animationArr[i].sY;
+                    if (animationArr[i].y >= animationArr[i].endY) {
+                        animationArr.splice(i, 1);
+                    }
+                }
+            },
+            50
+        );
+    }
+    /**
+     * 绘制圆圈
+     * 
+     * @method drawCircle
+     * 
+     * @param {} ctx 2d对象
+     * @param {number} x 坐标
+     * @param {number} y 坐标
+     * @param {number} r 半径
+     * @param {string} color 填充颜色
+     */
+    function drawCircle(ctx, x, y, r, color) {
+        color = color || '#999';
+        ctx.beginPath(); 
+        ctx.arc(x, y, r, 0, 2 * Math.PI);
+        ctx.fillStyle = color;
+        ctx.fill();
+    }
+
+    /**
+     * 获取日期
+     * 
+     * @method getDate
+     * 
+     * @return {Object} obj
+     * @return {string} obj.date '格式化日期2019-12-12 12:12:12'
+     * @return {number} obj.year 不解释
+     * @return {number} obj.month
+     * ....太多了，自己看
+     */
+    function getDate() {
+        var date = new Date();
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var day = date.getDate();
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var seconds = date.getSeconds();
+        return {
+            date: ''
+                + year
+                + '-'
+                + preset(month)
+                + '-'
+                + preset(day)
+                + ' '
+                + preset(hours)
+                + ':'
+                + preset(minutes)
+                + ':'
+                + preset(seconds),
+            year: year,
+            month: month,
+            day: day,
+            hours: hours,
+            minutes: minutes,
+            seconds: seconds,
+        };
+    }
+
+    /**
+     * 添加前置0
+     * @param {number} num
+     * @return {string} num
+     */
+    function preset(num) {
+        return num < 10 ? '0' + num : num + '';
+    }
+    /**
+     * 随机整数
+     * @param {number} start
+     * @param {number} end
+     * @return {number} number
+     */
+    function randomNum(start, end) {
+        return ~~(Math.random() * (end - start + 1) + start);
+    }
+</script>
