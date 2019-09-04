@@ -15,6 +15,9 @@ CREATE VIEW view_name db_name.tb_name
     WITH CHFCK OPTION; -- 更新整个视图
 -- 删除视图
 DROP VIEW view_name;
+-- 删除数据
+DELETE FROM db_name.view_name
+    WHERE id=1;
 -- 修改视图
 ALTER VIEW view_name
     AS ....  -- 和查询一样，关键字不一样alter
@@ -33,4 +36,13 @@ INSERT INTO db_name.tb_name.view_name
 -- 更新数据
 UPDATE db_name.view_name
     SET address='beijing'; -- 所有地址都修改
+
+```
+
+## 视图查询
+```sql
+-- 查询数据
+SELECT name, address
+    FROM da_name.view_name
+    WHERE age=12;
 ```
