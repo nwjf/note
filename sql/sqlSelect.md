@@ -88,7 +88,7 @@ SELECT id, name, sex, address, cheng
     AND db_name.tb1.id = db_name.tb2.id
     AND db_name.tb2.name = db_name.tb3.name;
 -- 简化
-USE(db_name);
+USE db_name;
 SELECT id, name, sex, address, chan
     FROM tb1, tb2, tb3
     WHERE name='lisi' AND tb1.id = tb2.id AND tb2.name = tb3.name;
