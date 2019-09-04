@@ -16,9 +16,9 @@ SCSS 基础笔记
 ```sass
 // sass 缩进语法
 .name
-    font-size: 10px;
+    font-size: 10px
     .text
-        font-size: 12px;
+        font-size: 12px
 ```
 
 ## 变量申明
