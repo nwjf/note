@@ -80,5 +80,45 @@ DROP sp_name;
 
 ## 出发器
 ```sql
+-- 创建触发器
+CREATE TRIGGER trigger_name trigger_event
+    ON tb_name FOR EACH ROW trigger_body;
 
+-- 列题
+CREATE TRIGGER trigger_name AFTER INSERT
+    ON tb_name FOR EACH ROW SET @str='content';
+
+-- 触发器分类， insert， delete， update
+-- new新数据， old旧数据，只能读，不能更新
+```
+
+
+## 用户账号管理
+```sql
+-- 创建用户账号
+CREATE USER 'zhansan'@'localhost' IDENTIFIED BY '123',
+            'lisi'@'localhost' IDENTIFIED BY PASSWORD '123';
+-- 删除用户
+DROP USER zhansan@localhost;
+-- 修改名字
+RENAME USER 'lisi'@'localhost' to 'wangwu'@'localhost';
+
+-- 查看用户列表
+SELECT * FROM mysql.user;
+
+-- 设置密码
+SET PASSWORD FOR 'wangwu'@'localhost'=PASSWORD('123');
+
+-- 设置权限select查询权限
+GRANT SELECT(id, name) ON db_name.tb_name TO 'zhansan'@'localhost';
+
+-- 列题，授予两个不存在的用户查询更改权限
+GRANT SELECT,UPDATE ON db_name,tb_name TO 'zhansan'@'localhost' IDENTIFIED BY'123';
+-- 列题， 所有数据库所有表
+GRANT ALL ON *.* TO 'wangwu'@'localhost';
+-- 列题， 授予存在的用户创建用户权限，权限转移
+GRANT CREATE USER ON *.* TO 'wangwu'@'localhost' WITH GRANT OPTION;
+
+-- 回收权限
+REVOKE SELECT ON db_name.tb_name FROM 'wangwu'@'loaclhost';
 ```

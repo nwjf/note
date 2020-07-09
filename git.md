@@ -2,6 +2,13 @@ git 基本命令使用
 
 ------------------------------------------------------------------------
 
+### install
+
+```shell
+# install
+# mac
+b
+```
 
 ### 
 
@@ -66,7 +73,7 @@ git diff fileName
 ## 推送设置
 
 ```shell
-git remote add orighin git@github.com   # 建立连接
+git remote add origin git@github.com   # 建立连接
 
 git remote set-url origin git@github.com # 更新连接
 
@@ -95,6 +102,8 @@ git push origin master
 git push -u origin master   # 首次推送
 
 git fetch
+
+--depth 1       # 浅克隆（一个commit号）
 ```
 
 ## 版本回退
