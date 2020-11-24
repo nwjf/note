@@ -39,7 +39,8 @@ git config --global --list
 ```shell
 git branch          # 显示当前分支
 
-git branch -a       # 显示所有分支
+git branch -a       # 显示所有分支和远程分支
+git branch -r       # 所有远程分支
 
 git branch dev      # 创建dev分支
 
@@ -112,8 +113,10 @@ git fetch
 git rm --cached *       # 删除git add 添加到暂存区的所有文件
 
 git reset --hard HEAD^  # 回退上一个版本
-git reset --herd HEAD~10# 回退到上10个版本
-git reset --herd commit_id  # 回退到指定版本
+git reset --hard HEAD~10# 回退到上10个版本
+git reset --hard commit_id  # 回退到指定版本
+# 放弃本地修改，重置为远程分支内容， 如：git reset --hard origin/master
+git reset --hard origin/branchName
 
 # 撤销git commit ,不撤销git add (不删除代码)
 git reset --soft HEAD^

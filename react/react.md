@@ -58,3 +58,11 @@ React 起源于 Facebook 的内部项目，因为该公司对市场上所有 Jav
 # 生成配置文件
 npm run eject
 ```
+
+## css less scss
+```shell
+# scss
+npm i node-sass -D
+# less
+# npm i 
+```

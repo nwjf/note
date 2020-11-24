@@ -1,8 +1,8 @@
 /*
  * @Author: wjf 
  * @Date: 2018-06-09 15:03:35 
- * @Last Modified by: wjf
- * @Last Modified time: 2018-06-09 15:04:34
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2020-08-27 20:44:13
  */
 // 主函数
 function isIdCard (val) {
